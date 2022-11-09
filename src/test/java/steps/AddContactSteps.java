@@ -20,7 +20,7 @@ public class AddContactSteps {
 
     @Before
     public void navigateToLoginPage() {
-        wd = new FirefoxDriver();
+        wd = new ChromeDriver();
         wd.manage().window().maximize();
         wd.get("https://contacts-app-tobbymarshall815.vercel.app");
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -44,7 +44,7 @@ public class AddContactSteps {
     public void enterValidContactData() {
         type(By.cssSelector("[placeholder = 'Name']"), "Black");
         type(By.cssSelector("[placeholder = 'Last Name']"), "Sascha");
-        type(By.cssSelector("[placeholder = 'Phone']"), "123 546");
+        type(By.cssSelector("[placeholder = 'Phone']"), "12354689");
         type(By.cssSelector("[placeholder = 'email']"), "sascha@gmail.com");
         type(By.cssSelector("[placeholder = 'Address']"), "Jena");
         type(By.cssSelector("[placeholder = 'description']"), "School boy");
@@ -57,7 +57,8 @@ public class AddContactSteps {
 
     @Then("Contact is displayed")
     public void isContactPresent() {
-        Assert.assertTrue(isElementPresent(By.xpath("//h2[.='Black']")));
+        click(By.cssSelector(".contact-item_card__2SOIM"));
+        Assert.assertTrue(isElementPresent(By.xpath("//button[contains(., 'Remove')]")));
     }
 
     public void type(By locator, String text) {
